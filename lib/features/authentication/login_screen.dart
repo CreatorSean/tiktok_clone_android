@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 import '../../../constants/gaps.dart';
 import '../../constants/sizes.dart';
 import 'widgets/auth_button.dart';
@@ -55,7 +54,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         elevation: 1,
         child: Padding(
           padding: const EdgeInsets.symmetric(
