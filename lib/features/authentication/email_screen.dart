@@ -13,15 +13,15 @@ class EmailScreen extends StatefulWidget {
 }
 
 class _EmailScreenState extends State<EmailScreen> {
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailStrController = TextEditingController();
 
-  String _email = "";
+  String _emailStr = "";
 
   String? _isEmailValid() {
-    if (_email.isEmpty) return null;
+    if (_emailStr.isEmpty) return null;
     final regExp = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (!regExp.hasMatch(_email)) {
+    if (!regExp.hasMatch(_emailStr)) {
       return "Email not valid";
     }
     return null;
@@ -30,10 +30,10 @@ class _EmailScreenState extends State<EmailScreen> {
   @override
   void initState() {
     super.initState();
-    _emailController.addListener(
+    _emailStrController.addListener(
       () {
         setState(() {
-          _email = _emailController.text;
+          _emailStr = _emailStrController.text;
         });
       },
     );
@@ -41,7 +41,7 @@ class _EmailScreenState extends State<EmailScreen> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _emailStrController.dispose();
     super.dispose();
   }
 
@@ -50,7 +50,7 @@ class _EmailScreenState extends State<EmailScreen> {
   }
 
   void _onSubmit() {
-    if (_email.isEmpty || _isEmailValid() != null) return;
+    if (_emailStr.isEmpty || _isEmailValid() != null) return;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -88,7 +88,7 @@ class _EmailScreenState extends State<EmailScreen> {
               ),
               Gaps.v8,
               TextField(
-                controller: _emailController,
+                controller: _emailStrController,
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 onEditingComplete: _onSubmit,
@@ -112,7 +112,7 @@ class _EmailScreenState extends State<EmailScreen> {
               GestureDetector(
                 onTap: _onSubmit,
                 child: FormButton(
-                  isDisabled: _email.isEmpty || _isEmailValid() != null,
+                  isDisabled: _emailStr.isEmpty || _isEmailValid() != null,
                 ),
               ),
             ],

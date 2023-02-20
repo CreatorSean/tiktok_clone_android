@@ -14,23 +14,23 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordStrController = TextEditingController();
 
-  String _password = "";
+  String _passwordStr = "";
 
-  bool _obscureText = true;
+  bool _isObscureTexted = true;
 
   bool _isPasswordValid() {
-    return _password.isNotEmpty && _password.length > 8;
+    return _passwordStr.isNotEmpty && _passwordStr.length > 8;
   }
 
   @override
   void initState() {
     super.initState();
-    _passwordController.addListener(
+    _passwordStrController.addListener(
       () {
         setState(() {
-          _password = _passwordController.text;
+          _passwordStr = _passwordStrController.text;
         });
       },
     );
@@ -38,7 +38,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   @override
   void dispose() {
-    _passwordController.dispose();
+    _passwordStrController.dispose();
     super.dispose();
   }
 
@@ -58,12 +58,12 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   ///텍스트 필드의 값을 삭제해주는 함수
   void _onClearTap() {
-    _passwordController.clear();
+    _passwordStrController.clear();
   }
 
   ///비밀번호를 보이게할지 안 보이게할지 정할 때 필요한 변수를 변경해주는 함수
-  void _toggleObscureText() {
-    _obscureText = !_obscureText;
+  void _setObscureText() {
+    _isObscureTexted = !_isObscureTexted;
     setState(() {});
   }
 
@@ -96,9 +96,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
               ),
               Gaps.v8,
               TextField(
-                controller: _passwordController,
+                controller: _passwordStrController,
                 onEditingComplete: _onSubmit,
-                obscureText: _obscureText,
+                obscureText: _isObscureTexted,
                 autocorrect: false,
                 decoration: InputDecoration(
                   suffix: Row(
@@ -114,9 +114,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       ),
                       Gaps.h16,
                       GestureDetector(
-                        onTap: _toggleObscureText,
+                        onTap: _setObscureText,
                         child: FaIcon(
-                          _obscureText
+                          _isObscureTexted
                               ? FontAwesomeIcons.eye
                               : FontAwesomeIcons.eyeSlash,
                           color: Colors.grey.shade500,

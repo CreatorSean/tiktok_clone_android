@@ -13,12 +13,12 @@ class UsernameScreen extends StatefulWidget {
 }
 
 class _UsernameScreenState extends State<UsernameScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _usernameStrController = TextEditingController();
 
-  String _username = "";
+  String _usernameStr = "";
 
   void _onNextTap() {
-    if (_username.isEmpty) return;
+    if (_usernameStr.isEmpty) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const EmailScreen(),
@@ -29,10 +29,10 @@ class _UsernameScreenState extends State<UsernameScreen> {
   @override
   void initState() {
     super.initState();
-    _usernameController.addListener(
+    _usernameStrController.addListener(
       () {
         setState(() {
-          _username = _usernameController.text;
+          _usernameStr = _usernameStrController.text;
         });
       },
     );
@@ -40,7 +40,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _usernameStrController.dispose();
     super.dispose();
   }
 
@@ -79,7 +79,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             ),
             Gaps.v16,
             TextField(
-              controller: _usernameController,
+              controller: _usernameStrController,
               decoration: InputDecoration(
                 hintText: 'Usernae',
                 enabledBorder: UnderlineInputBorder(
@@ -99,7 +99,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
             GestureDetector(
               onTap: _onNextTap,
               child: FormButton(
-                isDisabled: _username.isEmpty,
+                isDisabled: _usernameStr.isEmpty,
               ),
             ),
           ],
