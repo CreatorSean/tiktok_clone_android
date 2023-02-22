@@ -19,25 +19,15 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   DateTime initialDate = DateTime.now();
 
   void _onNextTap() {
-    Navigator.of(context).push(
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const InterestsScreen(),
       ),
+      (route) => false,
     );
   }
 
   @override
-  void initState() {
-    super.initState();
-    _setTextfieldDate(initialDate);
-  }
-
-  @override
-  void dispose() {
-    _birthdayController.dispose();
-    super.dispose();
-  }
-
   void _setTextfieldDate(DateTime date) {
     final textDate = date.toString().split(" ").first;
     //textController를 사용하여 textField에 value를 text로 전달
