@@ -17,12 +17,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
   final TextEditingController _passwordStrController = TextEditingController();
 
   String _passwordStr = "";
-
   bool _isObscureTexted = true;
-
-  bool _isPasswordValid() {
-    return _passwordStr.isNotEmpty && _passwordStr.length > 8;
-  }
 
   @override
   void initState() {
@@ -40,6 +35,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
   void dispose() {
     _passwordStrController.dispose();
     super.dispose();
+  }
+
+  bool _isPasswordValid() {
+    return _passwordStr.isNotEmpty && _passwordStr.length > 8;
   }
 
   void _onScaffoldTap() {
