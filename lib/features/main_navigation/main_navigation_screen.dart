@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone_android/constants/gaps.dart';
 import 'package:tiktok_clone_android/features/discover/discover_screen.dart';
+import 'package:tiktok_clone_android/features/inbox/inbox_screen.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/post_video.button.dart';
 import 'package:tiktok_clone_android/features/videos/vudei_timline_screen.dart';
@@ -43,11 +44,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndexInt != 1,
-            child: DiscoverScreen(),
+            child: const DiscoverScreen(),
           ),
           Offstage(
             offstage: _selectedIndexInt != 3,
-            child: Container(),
+            child: const InboxScreen(),
           ),
           Offstage(
             offstage: _selectedIndexInt != 4,
