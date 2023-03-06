@@ -5,7 +5,8 @@ import 'package:tiktok_clone_android/features/discover/discover_screen.dart';
 import 'package:tiktok_clone_android/features/inbox/inbox_screen.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/post_video.button.dart';
-import 'package:tiktok_clone_android/features/videos/vudei_timline_screen.dart';
+import 'package:tiktok_clone_android/features/users/users_profile_screen.dart';
+import 'package:tiktok_clone_android/features/videos/video_time_line_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -15,7 +16,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndexInt = 1;
+  int _selectedIndexInt = 4;
 
   void _onTap(int indexInt) {
     setState(() {
@@ -52,7 +53,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndexInt != 4,
-            child: Container(),
+            child: const UserProfileScreen(),
           ),
         ],
       ),
