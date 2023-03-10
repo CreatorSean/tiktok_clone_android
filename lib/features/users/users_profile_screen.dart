@@ -8,7 +8,13 @@ import 'package:tiktok_clone_android/features/utils.dart';
 import '../../constants/sizes.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  final String usernameStr;
+  final String tab;
+  const UserProfileScreen({
+    super.key,
+    required this.usernameStr,
+    required this.tab,
+  });
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
@@ -30,13 +36,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       body: SafeArea(
         child: DefaultTabController(
+          initialIndex: widget.tab == "likes" ? 1 : 0,
           length: 2,
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
                 SliverAppBar(
-                  title: const Text(
-                    "시헌",
+                  title: Text(
+                    widget.usernameStr,
                   ),
                   actions: [
                     IconButton(
@@ -52,22 +59,22 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   child: Column(
                     children: [
                       Gaps.v20,
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: 50,
                         foregroundColor: Colors.teal,
-                        foregroundImage: NetworkImage(
+                        foregroundImage: const NetworkImage(
                             "https://avatars.githubusercontent.com/u/108929080?v=4"),
                         child: Text(
-                          "시헌",
+                          widget.usernameStr,
                         ),
                       ),
                       Gaps.v20,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "@시헌",
-                            style: TextStyle(
+                          Text(
+                            "@${widget.usernameStr}",
+                            style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: Sizes.size18,
                             ),

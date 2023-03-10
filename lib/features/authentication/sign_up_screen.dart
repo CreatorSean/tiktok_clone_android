@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone_android/features/authentication/username_screen.dart';
 import 'package:tiktok_clone_android/features/utils.dart';
 
@@ -9,21 +10,21 @@ import 'login_screen.dart';
 import 'widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static String routeName = "/";
+  static const routeURL = "/";
+  static const routeName = "signUp";
   const SignUpScreen({super.key});
   final tDuration = const Duration(seconds: 1);
   final rDuration = const Duration(seconds: 1);
 
   void _onLoginTap(BuildContext context) async {
-    final result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+    context.push(LoginScreen.routeName);
+    //push a location onto the page stack => 이전 화면 위에 다른 화면을 올림
   }
 
   void _onEmailTap(BuildContext context) {
-    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    context.pushNamed(UsernameScreen.routeName);
+    //context.go는 이전 화면 위에 다른 화면을 올리는 것이 아님
+
     /* Navigator.of(context).push(
       PageRouteBuilder(
         transitionDuration: tDuration,
