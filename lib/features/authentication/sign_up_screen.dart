@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone_android/features/authentication/username_screen.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 
 import '../../../constants/gaps.dart';
 import '../../constants/sizes.dart';
@@ -8,48 +9,54 @@ import 'login_screen.dart';
 import 'widgets/auth_button.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static String routeName = "/";
   const SignUpScreen({super.key});
+  final tDuration = const Duration(seconds: 1);
+  final rDuration = const Duration(seconds: 1);
 
-  void onLoginTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const LoginScreen(),
-    ));
-  }
-
-  void _onEmailTap(BuildContext context) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-          transitionDuration: const Duration(
-            milliseconds: 300,
-          ),
-          reverseTransitionDuration: const Duration(
-            milliseconds: 300,
-          ),
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const UsernameScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            final offsetAnimation =
-                Tween(begin: const Offset(1, 0), end: Offset.zero)
-                    .animate(animation);
-            final opacityAnimation = Tween(
-              begin: 0.5,
-              end: 1.0,
-            ).animate(animation);
-            return SlideTransition(
-              position: offsetAnimation,
-              child: FadeTransition(
-                opacity: opacityAnimation,
-                child: child,
-              ),
-            );
-          }),
+  void _onLoginTap(BuildContext context) async {
+    final result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
     );
   }
 
+  void _onEmailTap(BuildContext context) {
+    Navigator.of(context).pushNamed(UsernameScreen.routeName);
+    /* Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: tDuration,
+        reverseTransitionDuration: rDuration,
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const UsernameScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final offsetAnimation = Tween(
+            begin: const Offset(0, -1),
+            end: Offset.zero,
+          );
+          final opacityAnimation = Tween(
+            begin: 0.5,
+            end: 0.5,
+          ).animate(animation);
+          return SlideTransition(
+            position: offsetAnimation.animate(animation),
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        },
+      ),
+    ); */
+  }
+
   void onAppleTap(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const LoginScreen(),
-    ));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+    );
   }
 
   @override
@@ -66,7 +73,6 @@ class SignUpScreen extends StatelessWidget {
         //   );
         // }
         return Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -78,17 +84,23 @@ class SignUpScreen extends StatelessWidget {
                   const Text(
                     'Sign up for TikTok',
                     style: TextStyle(
-                      fontSize: Sizes.size20,
+                      fontSize: Sizes.size24,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   Gaps.v20,
-                  const Text(
-                    'Create a profile, follow other accounts, make your own videos, and more.',
-                    style: TextStyle(
-                      fontSize: Sizes.size16,
+                  const Opacity(
+                    opacity: 0.6,
+                    child: Opacity(
+                      opacity: 0.7,
+                      child: Text(
+                        'Create a profile, follow other accounts, make your own videos, and more.',
+                        style: TextStyle(
+                          fontSize: Sizes.size16,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
                   Gaps.v40,
                   if (orientation == Orientation.portrait) ...[
@@ -138,12 +150,12 @@ class SignUpScreen extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: BottomAppBar(
-            color: Colors.grey.shade50,
-            elevation: 1,
+          bottomNavigationBar: Container(
+            color: isDarkMode(context) ? null : Colors.grey.shade50,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: Sizes.size32,
+              padding: const EdgeInsets.only(
+                top: Sizes.size32,
+                bottom: Sizes.size64,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -153,7 +165,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.h5,
                   GestureDetector(
-                    onTap: () => onLoginTap(context),
+                    onTap: () => _onLoginTap(context),
                     child: Text(
                       'Log in',
                       style: TextStyle(

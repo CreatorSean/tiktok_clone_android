@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone_android/constants/gaps.dart';
 import 'package:tiktok_clone_android/features/authentication/email_screen.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 
 import '../../constants/sizes.dart';
 import 'widgets/form_button.dart';
 
 class UsernameScreen extends StatefulWidget {
+  static String routeName = "/username";
   const UsernameScreen({super.key});
 
   @override
@@ -19,10 +21,9 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   void _onNextTap() {
     if (_usernameStr.isEmpty) return;
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
-      ),
+    Navigator.of(context).pushNamed(
+      EmailScreen.routeName,
+      arguments: EmailScreenArgs(usernameStr: _usernameStr),
     );
   }
 
@@ -47,9 +48,8 @@ class _UsernameScreenState extends State<UsernameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
+        elevation: 2,
         title: const Text(
           'Sign up',
         ),
@@ -70,10 +70,10 @@ class _UsernameScreenState extends State<UsernameScreen> {
               ),
             ),
             Gaps.v8,
-            const Text(
+            Text(
               "You can alwatys change this later.",
               style: TextStyle(
-                color: Colors.black54,
+                color: isDarkMode(context) ? null : Colors.black54,
                 fontSize: Sizes.size16,
               ),
             ),

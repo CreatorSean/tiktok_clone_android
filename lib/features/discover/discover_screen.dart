@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone_android/constants/gaps.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../constants/sizes.dart';
@@ -53,6 +54,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               controller: _textEditingController,
               onChanged: _onSearchChanged,
               onSubmitted: _onSearchSubmitted,
+              style: TextStyle(
+                color: isDarkMode(context) ? Colors.white : Colors.black,
+              ),
             ),
           ),
           bottom: TabBar(
@@ -65,9 +69,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               fontWeight: FontWeight.w600,
               fontSize: Sizes.size16,
             ),
-            unselectedLabelColor: Colors.grey.shade500,
-            labelColor: Colors.black,
-            indicatorColor: Colors.black,
+            indicatorColor: Colors.blue,
             tabs: [
               for (var tab in tabsList)
                 Tab(
@@ -119,41 +121,49 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     ),
                   ),
                   Gaps.v5,
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        radius: 15,
-                        backgroundImage: NetworkImage(
-                          "https://avatars.githubusercontent.com/u/108929080?v=4",
+                  DefaultTextStyle(
+                    style: TextStyle(
+                      color: isDarkMode(context)
+                          ? Colors.grey.shade300
+                          : Colors.grey.shade600,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 15,
+                          backgroundImage: NetworkImage(
+                            "https://avatars.githubusercontent.com/u/108929080?v=4",
+                          ),
                         ),
-                      ),
-                      Gaps.h4,
-                      Expanded(
-                        child: Text(
-                          "My_Name_is_Sean and this is very long name",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        Gaps.h4,
+                        Expanded(
+                          child: Text(
+                            "My_Name_is_Sean and this is very long name",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey.shade600,
+                            ),
+                          ),
+                        ),
+                        Gaps.v4,
+                        FaIcon(
+                          FontAwesomeIcons.heart,
+                          size: Sizes.size16,
+                          color: Colors.grey.shade500,
+                        ),
+                        Gaps.h2,
+                        Text(
+                          "2.5M",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.grey.shade600,
                           ),
                         ),
-                      ),
-                      Gaps.v4,
-                      FaIcon(
-                        FontAwesomeIcons.heart,
-                        size: Sizes.size16,
-                        color: Colors.grey.shade500,
-                      ),
-                      Gaps.h2,
-                      Text(
-                        "2.5M",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

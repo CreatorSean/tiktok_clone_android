@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone_android/constants/gaps.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 import '../../constants/sizes.dart';
 import '../main_navigation/main_navigation_screen.dart';
 
@@ -41,8 +42,8 @@ class _TutorialScreenState extends State<TutorialScreen> {
     }
   }
 
-  void _onEnterAppTap(){
-     Navigator.of(context).pushAndRemoveUntil(
+  void _onEnterAppTap() {
+    Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const MainNavigationScreen(),
       ),
@@ -112,10 +113,13 @@ class _TutorialScreenState extends State<TutorialScreen> {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
+          color: isDarkMode(context) ? Colors.black : Colors.white,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size24,
-              horizontal: Sizes.size24,
+            padding: const EdgeInsets.only(
+              top: Sizes.size32,
+              bottom: Sizes.size64,
+              left: Sizes.size24,
+              right: Sizes.size24,
             ),
             child: AnimatedOpacity(
               opacity: _showinPage == Page.first ? 0 : 1,

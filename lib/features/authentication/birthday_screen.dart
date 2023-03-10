@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_clone_android/constants/gaps.dart';
 import 'package:tiktok_clone_android/features/onboarding/interests_screen.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 
 import '../../constants/sizes.dart';
 import 'widgets/form_button.dart';
@@ -37,7 +38,6 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         title: const Text(
@@ -60,10 +60,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
               ),
             ),
             Gaps.v8,
-            const Text(
+            Text(
               "Your birthday won'be shown publicly",
               style: TextStyle(
-                color: Colors.black54,
+                color: isDarkMode(context) ? null : Colors.black54,
                 fontSize: Sizes.size16,
               ),
             ),

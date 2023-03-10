@@ -6,7 +6,10 @@ import 'package:tiktok_clone_android/features/inbox/inbox_screen.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/nav_tab.dart';
 import 'package:tiktok_clone_android/features/main_navigation/widgets/post_video.button.dart';
 import 'package:tiktok_clone_android/features/users/users_profile_screen.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 import 'package:tiktok_clone_android/features/videos/video_time_line_screen.dart';
+
+import '../../constants/sizes.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -35,8 +38,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
-      backgroundColor: _selectedIndexInt == 0 ? Colors.black : Colors.white,
+      backgroundColor:
+          _selectedIndexInt == 0 || isDark ? Colors.black : Colors.white,
       body: Stack(
         children: [
           Offstage(
@@ -57,8 +62,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: _selectedIndexInt == 0 ? Colors.black : Colors.white,
+      bottomNavigationBar: Container(
+        color: _selectedIndexInt == 0 || isDark ? Colors.black : Colors.white,
+        padding: const EdgeInsets.only(
+          bottom: Sizes.size32,
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_clone_android/features/utils.dart';
 import 'package:tiktok_clone_android/features/videos/widgets/video_post.dart';
 
 class VideoTimeLineScreen extends StatefulWidget {
@@ -50,6 +51,7 @@ class _VideoTimeLineScreenState extends State<VideoTimeLineScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDark = isDarkMode(context);
     return RefreshIndicator(
       displacement: 40,
       edgeOffset: 20,

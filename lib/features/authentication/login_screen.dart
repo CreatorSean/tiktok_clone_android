@@ -4,13 +4,15 @@ import 'package:tiktok_clone_android/features/authentication/login_form_screen.d
 
 import '../../../constants/gaps.dart';
 import '../../constants/sizes.dart';
+import '../utils.dart';
 import 'widgets/auth_button.dart';
 
 class LoginScreen extends StatelessWidget {
+  static String routeName = "/login";
   const LoginScreen({super.key});
 
-  void onSignUpTap(BuildContext context) {
-    Navigator.of(context).pop(Route);
+  void _onSignUpTap(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   void _onEmailLoginTap(BuildContext context) {
@@ -35,18 +37,20 @@ class LoginScreen extends StatelessWidget {
               const Text(
                 'Log in to TikTok',
                 style: TextStyle(
-                  fontSize: Sizes.size20,
+                  fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               Gaps.v20,
-              const Text(
-                'Manage your account, check notifications, comment on videos, and more.',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black45,
+              const Opacity(
+                opacity: 0.6,
+                child: Text(
+                  'Manage your account, check notifications, comment on videos, and more.',
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
               Gaps.v40,
               GestureDetector(
@@ -65,12 +69,12 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade50,
-        elevation: 1,
+      bottomNavigationBar: Container(
+        color: isDarkMode(context) ? null : Colors.grey.shade50,
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: Sizes.size32,
+          padding: const EdgeInsets.only(
+            top: Sizes.size32,
+            bottom: Sizes.size64,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -80,7 +84,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Gaps.h5,
               GestureDetector(
-                onTap: () => onSignUpTap(context),
+                onTap: () => _onSignUpTap(context),
                 child: Text(
                   'Sign up',
                   style: TextStyle(
