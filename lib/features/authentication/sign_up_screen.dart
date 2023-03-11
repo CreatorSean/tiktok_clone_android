@@ -17,12 +17,17 @@ class SignUpScreen extends StatelessWidget {
   final rDuration = const Duration(seconds: 1);
 
   void _onLoginTap(BuildContext context) async {
-    context.push(LoginScreen.routeName);
+    context.pushNamed(LoginScreen.routeName);
     //push a location onto the page stack => 이전 화면 위에 다른 화면을 올림
   }
 
   void _onEmailTap(BuildContext context) {
-    context.pushNamed(UsernameScreen.routeName);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
     //context.go는 이전 화면 위에 다른 화면을 올리는 것이 아님
 
     /* Navigator.of(context).push(
