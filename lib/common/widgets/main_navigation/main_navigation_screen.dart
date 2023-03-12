@@ -8,6 +8,7 @@ import 'package:tiktok_clone_android/common/widgets/main_navigation/widgets/nav_
 import 'package:tiktok_clone_android/common/widgets/main_navigation/widgets/post_video.button.dart';
 import 'package:tiktok_clone_android/features/users/users_profile_screen.dart';
 import 'package:tiktok_clone_android/features/utils.dart';
+import 'package:tiktok_clone_android/features/videos/video_recording_screen.dart';
 import 'package:tiktok_clone_android/features/videos/video_time_line_screen.dart';
 
 import '../../../constants/sizes.dart';
@@ -46,12 +47,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onPostVideoButtonTap() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Container(),
-        fullscreenDialog: true,
-      ),
-    );
+    context.pushNamed(VideoRecordingScreen.routeName);
   }
 
   @override

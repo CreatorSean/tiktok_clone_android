@@ -1,10 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone_android/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_clone_android/features/authentication/login_screen.dart';
 import 'package:tiktok_clone_android/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_clone_android/features/inbox/activity_screen.dart';
+import 'package:tiktok_clone_android/features/inbox/chat_detail_scteen.dart';
+import 'package:tiktok_clone_android/features/inbox/chats_screen.dart';
 import 'package:tiktok_clone_android/features/onboarding/interests_screen.dart';
+import 'package:tiktok_clone_android/features/videos/video_recording_screen.dart';
 
 final router = GoRouter(
+  initialLocation: "/inbox",
   routes: [
     GoRoute(
       name: SignUpScreen.routeName,
@@ -30,6 +36,43 @@ final router = GoRouter(
           tabStr: tab,
         );
       },
+    ),
+    GoRoute(
+      name: ActivityScreen.routeName,
+      path: ActivityScreen.routeURL,
+      builder: (context, state) => const ActivityScreen(),
+    ),
+    GoRoute(
+      name: ChatScreen.routeName,
+      path: ChatScreen.routeURL,
+      builder: (context, state) => const ChatScreen(),
+    ),
+    GoRoute(
+      name: ChatDetailScreen.routeName,
+      path: ChatDetailScreen.routeURL,
+      builder: (context, state) {
+        final id = state.params["id"]!;
+        return ChatDetailScreen(chatID: id);
+      },
+    ),
+    GoRoute(
+      name: VideoRecordingScreen.routeName,
+      path: VideoRecordingScreen.routeURL,
+      pageBuilder: (context, state) => CustomTransitionPage(
+        transitionDuration: const Duration(
+          milliseconds: 150,
+        ),
+        child: const VideoRecordingScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final position = Tween(
+            begin: const Offset(0, 1),
+            end: Offset.zero,
+          ).animate(animation);
+          return SlideTransition(
+            position: position,
+          );
+        },
+      ),
     ),
   ],
 );

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone_android/common/widgets/video_configuration/video_config.dart';
 import 'package:tiktok_clone_android/features/videos/widgets/video_button.dart';
 import 'package:tiktok_clone_android/features/videos/widgets/video_comments.dart';
 import 'package:video_player/video_player.dart';
@@ -33,6 +34,8 @@ class _VideoPostState extends State<VideoPost>
 
   bool _isPaused = false;
 
+  bool _autoMute = videoConfig.value;
+
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
       if (_videoPlayerController.value.duration ==
@@ -53,26 +56,6 @@ class _VideoPostState extends State<VideoPost>
     _videoPlayerController.play();
     setState(() {});
     _videoPlayerController.addListener(_onVideoChange);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initVideoPlayer();
-    _animationController = AnimationController(
-      vsync: this,
-      lowerBound: 1.0,
-      upperBound: 1.5,
-      value: 1.5,
-      duration: _animatedDuration,
-    );
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    super.dispose();
-    widget.onVideoFinished;
   }
 
   void _onVisibilityChanged(VisibilityInfo info) {
@@ -100,6 +83,30 @@ class _VideoPostState extends State<VideoPost>
         _isPaused = !_isPaused;
       },
     );
+
+    videoConfig.addListener(() {
+      _autoMute = videoConfig.value;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initVideoPlayer();
+    _animationController = AnimationController(
+      vsync: this,
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      value: 1.5,
+      duration: _animatedDuration,
+    );
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
+    widget.onVideoFinished;
   }
 
   void _onCommentsTap(BuildContext context) async {
@@ -156,6 +163,21 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            left: 20,
+            top: 40,
+            child: IconButton(
+              icon: FaIcon(
+                _autoMute
+                    ? FontAwesomeIcons.volumeOff
+                    : FontAwesomeIcons.volumeHigh,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                videoConfig.value = !videoConfig.value;
+              },
             ),
           ),
           Positioned(
